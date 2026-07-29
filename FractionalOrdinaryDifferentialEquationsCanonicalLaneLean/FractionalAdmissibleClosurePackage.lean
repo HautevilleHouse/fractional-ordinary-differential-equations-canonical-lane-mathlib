@@ -1,0 +1,24 @@
+import canonicalLaneMathlib.AdmissibleClass
+import HautevilleHouse.FractionalOrdinaryDifferentialEquationsCanonicalLaneLean.FractionalDerivativeOperator
+import HautevilleHouse.FractionalOrdinaryDifferentialEquationsCanonicalLaneLean.FractionalIVPWellPosedness
+import HautevilleHouse.FractionalOrdinaryDifferentialEquationsCanonicalLaneLean.MittagLefflerStability
+import HautevilleHouse.FractionalOrdinaryDifferentialEquationsCanonicalLaneLean.FractionalComparisonPrinciple
+
+namespace HautevilleHouse
+namespace FractionalOrdinaryDifferentialEquationsCanonicalLaneLean
+
+structure FractionalAdmissibleClosurePackage where
+  derivative : FractionalDerivativeOperator
+  ivp : FractionalIVPWellPosednessPackage derivative
+  stability : MittagLefflerStabilityPackage ivp
+  comparison : FractionalComparisonPrinciplePackage stability
+  allClosed : Prop
+
+def FractionalAdmissibleClosurePackageClosed (F : FractionalAdmissibleClosurePackage) : Prop :=
+  FractionalDerivativeClosed F.derivative ∧
+  FractionalIVPWellPosednessClosed F.ivp ∧
+  MittagLefflerStabilityClosed F.stability ∧
+  FractionalComparisonPrincipleClosed F.comparison
+
+end FractionalOrdinaryDifferentialEquationsCanonicalLaneLean
+end HautevilleHouse
